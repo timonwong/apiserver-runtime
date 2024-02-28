@@ -31,7 +31,7 @@ import (
 )
 
 // change: apiserver-runtime
-//const defaultEtcdPathPrefix = "/registry/wardle.example.com"
+// const defaultEtcdPathPrefix = "/registry/wardle.example.com"
 
 // WardleServerOptions contains state for master/api server
 type WardleServerOptions struct {
@@ -112,12 +112,6 @@ func (o *WardleServerOptions) Config() (*apiserver.Config, error) {
 	if err := o.RecommendedOptions.SecureServing.MaybeDefaultWithSelfSignedCerts("localhost", nil, []net.IP{net.ParseIP("127.0.0.1")}); err != nil {
 		return nil, fmt.Errorf("error creating self-signed certificates: %v", err)
 	}
-
-	// change: allow etcd options to be nil
-	// TODO: this should be reverted after rebasing sample-apiserver onto https://github.com/kubernetes/kubernetes/pull/101106
-	//if o.RecommendedOptions.Etcd != nil {
-	//	o.RecommendedOptions.Etcd.StorageConfig.Paging = utilfeature.DefaultFeatureGate.Enabled(features.APIListChunking)
-	//}
 
 	// change: apiserver-runtime
 	// ExtraAdmissionInitializers set through ApplyServerOptionsFns by appending to ServerOptionsFns
