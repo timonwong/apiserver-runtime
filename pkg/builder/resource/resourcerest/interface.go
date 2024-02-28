@@ -92,6 +92,9 @@ type Updater = rest.Updater
 // Required by most controllers.
 type Watcher = rest.Watcher
 
+// SingularNameProvider if implemented will returns singular name of resources.
+type SingularNameProvider = rest.SingularNameProvider
+
 // StandardStorage defines the standard endpoints for resources.
 type StandardStorage = rest.StandardStorage
 
