@@ -127,6 +127,7 @@ func (o *WardleServerOptions) Config() (*apiserver.Config, error) {
 	// }
 
 	serverConfig := genericapiserver.NewRecommendedConfig(apiserver.Codecs)
+	serverConfig = ApplyRecommendedConfigFns(serverConfig)
 
 	// change: apiserver-runtime
 	// OpenAPIConfig set through ApplyRecommendedConfigFns by calling SetOpenAPIDefinitions
@@ -138,8 +139,6 @@ func (o *WardleServerOptions) Config() (*apiserver.Config, error) {
 	if err := o.RecommendedOptions.ApplyTo(serverConfig); err != nil {
 		return nil, err
 	}
-
-	serverConfig = ApplyRecommendedConfigFns(serverConfig)
 
 	config := &apiserver.Config{
 		GenericConfig: serverConfig,
